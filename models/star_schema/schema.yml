@@ -1,0 +1,126 @@
+
+version: 2
+
+sources:
+    - name: EXAM_CAILLABET
+      description: 'Schema initial'
+      database: EXAM_CAILLABET
+      schema: PUBLIC
+      tables:
+        - name: album
+          description: 'Table des albums.'
+        - name: artist
+          description: 'Table des artistes.'
+        - name: genre
+          description: 'Table des genres.'
+        - name: playlist
+          description: 'Table des playlists.'
+        - name: playlisttrack
+          description: 'Table d''association tracks/playlists.'
+        - name: track
+          description: 'Table des pistes.'
+
+models:
+  - name: dim_album
+    description: "Table de dimension des albums"
+    columns:
+      - name: AlbumId
+        description: "Album ID"
+      - name: Title
+        description: "Titre de l'album"
+      - name: Artist_name
+        description: "Nom de l'artiste"
+      - name: Artist_birthyear
+        description: "Année de naissance de l'artiste"
+      - name: Artist_country
+        description: "Pays de l'artiste"
+      - name: Prod_year
+        description: "Année de production"
+      - name: Cd_number
+        description: "Nombre de CD"
+    config:
+      tags:
+        - schema
+  - name: dim_genre
+    description: "Table de dimension des genres."
+    columns:
+      - name: GenreId
+        description: "Genre ID"
+      - name: Name
+        description: "Nom du genre"
+    config:
+      tags:
+        - schema
+  - name: dim_playlist
+    description: "Table de dimension des playlists."
+    columns:
+      - name: PlaylistId
+        description: "Playlist ID"
+      - name: Name
+        description: "Nom de la playlist"
+    config:
+      tags:
+        - schema
+  - name: dim_composer
+    description: "Table de dimension des compositeurs."
+    columns:
+      - name: ComposerId
+        description: "Composer ID"
+      - name: Name
+        description: "Nom du compositeur"
+    config:
+      tags:
+        - schema
+  - name: fact_track
+    description: "Table de faits des pistes."
+    columns:
+      - name: TrackId
+        description: "Track ID"
+      - name: Name
+        description: "Nom de la piste"
+      - name: ComposerId
+        description: "Composer ID"
+        tests:
+          - relationships:
+              to: ref('dim_composer')
+              field: ComposerId
+      - name: GenreId
+        description: "Genre ID"
+        tests:
+          - relationships:
+              to: ref('dim_genre')
+              field: GenreId
+      - name: AlbumId
+        description: "Album ID"
+        tests:
+          - relationships:
+              to: ref('dim_album')
+              field: AlbumId
+      - name: Milliseconds
+        description: "Milliseconds"
+      - name: Bytes
+        description: "Bytes"
+    config:
+      tags:
+        - schema
+  - name: dim_track_playlist
+    description: "Table de dimension des associations pistes/playlists."
+    columns:
+      - name: TrackId
+        description: "Track ID"
+        tests:
+          - relationships:
+              to: ref('dim_track')
+              field: TrackId
+      - name: PlaylistId
+        description: "Playlist ID"
+        tests:
+          - relationships:
+              to: ref('dim_playlist')
+              field: PlaylistId
+    config:
+      tags:
+        - schema
+    
+      
+      
