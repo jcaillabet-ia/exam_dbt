@@ -1,15 +1,17 @@
-Welcome to your new dbt project!
+# Création des table du schema étoile
 
-### Using the starter project
+```bash
+clear && dbt run --select tag:schema
+```
 
-Try running the following commands:
-- dbt run
-- dbt test
+# Création des vues correspondantes aux requêtes
 
+```bash
+clear && dbt run --select tag:queries
+```
+# Test des modèles
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+```bash
+clear && dbt test --select tag:schema
+clear && dbt test --select tag:queries
+```

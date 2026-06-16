@@ -30,5 +30,5 @@ models:
   exam_dbt:
     star_schema:
       +materialized: table
-    # queries:
-    #   +materialized: view
+    queries:
+      +materialized: view

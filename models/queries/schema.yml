@@ -1,0 +1,122 @@
+
+version: 2
+
+sources:
+    - name: EXAM_CAILLABET
+      description: 'Schema étoile'
+      database: EXAM_CAILLABET
+      schema: DBT_STAR
+      tables:
+        - name: dim_album
+          description: 'Table de dimension des albums.'
+        - name: dim_composer
+          description: 'Table de dimension des compositeurs.'
+        - name: dim_genre
+          description: 'Table de dimension des genres.'
+        - name: dim_playlist
+          description: 'Table de dimension des playlists.'
+        - name: dim_track_playlist
+          description: 'Table de dimension des associations pistes/playlists.'
+        - name: fact_track
+          description: 'Table de fait des pistes.'
+
+models:
+  - name: Q1
+    description: "Donnez les titres des albums qui ont plus de 1 CD."
+    columns:
+      - name: Title
+        description: "Titre de l'album"
+    config:
+      tags:
+        - queries
+  - name: Q2
+    description: "Donnez les morceaux produits en 2000 ou en 2002."
+    columns:
+      - name: Name
+        description: "Nom du morceau"
+    config:
+      tags:
+        - queries
+  - name: Q3
+    description: "Donnez le nom et le compositeur des morceaux de Rock et de Jazz."
+    columns:
+      - name: Track_Name
+        description: "Nom du morceau"
+      - name: Composer_Name
+        description: "Nom du compositeur"
+    config:
+      tags:
+        - queries
+  - name: Q4
+    description: "Donnez les 10 albums les plus longs."
+    columns:
+      - name: Title
+        description: "Titre de l'album"
+    config:
+      tags:
+        - queries
+  - name: Q5
+    description: "Donnez le nombre d'albums produits pour chaque artiste."
+    columns:
+      - name: artist_name
+        description: "Nom de l'artiste"
+      - name: nb_album
+        description: "Nombre d'albums"
+    config:
+      tags:
+        - queries
+  - name: Q6
+    description: "Donnez le nombre de morceaux produits par chaque artiste."
+    columns:
+      - name: artist_name
+        description: "Nom de l'artiste"
+      - name: nb_morceau
+        description: "Nombre de morceaux"
+    config:
+      tags:
+        - queries
+  - name: Q7
+    description: "Donnez le genre de musique le plus écouté dans les années 2000."
+    columns:
+      - name: Name
+        description: "Nom du genre"
+    config:
+      tags:
+        - queries
+  - name: Q8
+    description: "Donnez les noms de toutes les playlists où figurent des morceaux de plus de 4 minutes."
+    columns:
+      - name: Name
+        description: "Nom de la playlist"
+    config:
+      tags:
+        - queries
+  - name: Q9
+    description: "Donnez les morceaux de Rock dont les artistes sont en France."
+    columns:
+      - name: TrackId
+        description: "ID de la piste"
+    config:
+      tags:
+        - queries
+  - name: Q10
+    description: "Donnez la moyenne des tailles des morceaux par genre musical."
+    columns:
+      - name: Name
+        description: "Nom du genre"
+      - name: TailleMoy
+        description: "Taille moyenne ( en MB )"
+    config:
+      tags:
+        - queries
+  - name: Q11
+    description: "Donnez les playlists où figurent des morceaux d'artistes nés avant 1990."
+    columns:
+      - name: Name
+        description: "Nom de la playlist"
+    config:
+      tags:
+        - queries
+    
+      
+      
