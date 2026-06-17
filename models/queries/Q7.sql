@@ -5,6 +5,7 @@ with query7 as (
     INNER JOIN {{ ref('dim_album') }} da ON ft.AlbumId = da.AlbumId
     WHERE da.prod_year = 2000
     GROUP BY dg.name
+    ORDER BY COUNT(ft.trackid) DESC
     LIMIT 1
 )
 
